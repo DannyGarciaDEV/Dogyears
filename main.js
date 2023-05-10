@@ -1,23 +1,35 @@
-//Set my age for the human age
-const myAge = 20;
-//Create a variable for the early years
-let earlyYears = 2;
-
-earlyYears = earlyYears * 10.5;
-console.log(`Dog years for the first 2 years: ${earlyYears}.`);
-
-//Set a number since we accounted for the early years
-let laterYears = myAge - 2;
-
-//Calcule the later years in dog years
-laterYears *= 4;
-console.log(`Dog years for the years after that: ${laterYears}.`);
-
-//Create variable to hold my human years in dog years
-let myAgeInDogYears = earlyYears + laterYears;
-
-//Create a variable for my name
-const myName = 'Danny Garcia'.toLowerCase();
-
-//Crete a string in a console.log to display
-console.log(`My name is ${myName}. I am ${myAge} years old in human years which is ${myAgeInDogYears} years old in dog years.`);
+function showImg() {
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then(response => response.json())
+      .then(data => {
+        const imageUrl = data.message;
+        const dogImage = document.createElement("img");
+        dogImage.src = imageUrl;
+        document.body.appendChild(dogImage);
+      })
+      .catch(error => {
+        console.error("Error fetching dog image:", error);
+      });
+  }
+  
+  function calculateDogYears() {
+    const myAge = parseInt(document.getElementById("ageInput").value);
+  
+    let earlyYears = 2 * 10.5;
+    let laterYears = myAge - 2;
+    laterYears *= 4;
+  
+    let myAgeInDogYears = earlyYears + laterYears;
+  
+    const myName = document.getElementById("nameInput").value.toLowerCase();
+  
+    const resultText = `My name is ${myName}. I am ${myAge} years old in human years, which is ${myAgeInDogYears} years old in dog years.`;
+  
+    document.getElementById("result").textContent = resultText;
+  }
+  
+  // Add event listener to the button with id "showImgButton"
+  document.getElementById("showImgButton").addEventListener("click", function () {
+    showImg();
+    calculateDogYears();
+  });
